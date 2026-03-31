@@ -3,7 +3,10 @@ import { BlacklistToken } from "../models/blacklist.model.js";
 
 const authUser = async (req, res, next) => {
     try {
-        const token = req.cookies.token;
+        const token = req.cookies?.token;
+
+        // console.log("Incoming cookies:", req.cookies);
+        // console.log("Incoming raw cookie header:", req.headers.cookie);
 
         if (!token) {
             return res.status(401).json({
@@ -24,6 +27,7 @@ const authUser = async (req, res, next) => {
 
         next();
     } catch (error) {
+        console.error("Auth middleware error:", error);
         return res.status(401).json({
             message: "Invalid token.",
         });

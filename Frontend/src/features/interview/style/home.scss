@@ -386,3 +386,25 @@ $font-stack:
     }
   }
 }
+
+// ── Logout Button ───────────────────────────────────────────────────────────
+.logout-btn {
+  background: transparent;
+  border: 1px solid $border-color;
+  color: $text-primary;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+    background-color: rgba($accent, 0.08);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}

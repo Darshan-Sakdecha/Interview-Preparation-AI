@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://interview-preparation-ai-backend.onrender.com",
-    withCredentials: true
+    baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
+    withCredentials: true,
 });
 
 export const register = async ({ username, email, password }) => {
@@ -10,7 +10,7 @@ export const register = async ({ username, email, password }) => {
         const response = await api.post("/api/v1/auth/register", {
             username,
             email,
-            password
+            password,
         });
         return response.data;
     } catch (error) {
@@ -23,7 +23,7 @@ export const login = async ({ email, password }) => {
     try {
         const response = await api.post("/api/v1/auth/login", {
             email,
-            password
+            password,
         });
         return response.data;
     } catch (error) {
@@ -48,6 +48,8 @@ export const getMe = async () => {
         return response.data;
     } catch (error) {
         console.log("GetMe error:", error.response?.data || error.message);
-        return null;
+        throw error;
     }
 };
+
+export default api;
